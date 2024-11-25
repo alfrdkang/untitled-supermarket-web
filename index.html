@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&family=Indie+Flower&display=swap" rel="stylesheet">
+</head> 
+    <body>
+        <div class="left-container">
+            <div class="auth-container">
+                <h1>Sign Up Auth</h1>
+                <hr>
+    
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" id="authemail" required>
+    
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" id="authpassword" required>
+    
+                <div class="clearfix">
+                    <button type="submit" class="loginbtn" id="loginbtn">Log in</button>
+                    <button type="submit" class="signupbtn" id="signupbtn">Sign Up</button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="playerTable" id="playerTable">
+                    <tr id="tableBody">
+                      <th>ID</th>
+                      <th>Level</th>
+                      <th>Name</th>
+                      <th>Health</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="right-container">
+            <div class="create-container">
+                <h1>Create Player</h1>
+                <hr>
+    
+                <label for="email"><b>Username</b></label>
+                <input type="text" placeholder="Enter Name" name="name" id="create-name" required>
+    
+                <label for="level"><b>Level</b></label>
+                <input type="text" placeholder="Enter Level" name="level" id="create-level" required>
+
+                <label for="health"><b>Health</b></label>
+                <input type="text" placeholder="Enter Health" name="health" id="create-health" required>
+    
+                <div class="clearfix w-auto">
+                    <button type="submit" class="createbtn" id="createBtn">Create</button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="js/index.js"></script>
+        <script type="module" src="js/DatabaseManager.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </body>
+</html>
