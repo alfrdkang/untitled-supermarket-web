@@ -2,12 +2,12 @@ tailwind.config = {
     theme: {
       extend: {
         colors: {
-          'pink': '#ee92c2',
-          'cream': '#e8e5da',
-          'orange': '#fa8334',
-          'dorange': '#D26822',
-          'lblue': '#648de5',
-          'dblue': '#304c89',
+          'yellow': '#ffe11d',
+          'blue': '#00b8c4',
+          'cream': '#ffeec3',
+          'pink': '#ee3253',
+          'brown': '#844d38',
+          'dblue': '#302e3c',
         },
         fontFamily: {
             'concert': ['Concert One', 'sans-serif'],

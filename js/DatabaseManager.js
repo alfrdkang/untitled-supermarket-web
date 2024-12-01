@@ -6,8 +6,6 @@ const db = getDatabase(app);
 const auth = getAuth(app);
 const playerRef = ref(db, "players");
 
-getPlayerData();
-
 function createUser(email, password){
     console.log("creating the user");
     createUserWithEmailAndPassword(auth, email, password)
@@ -35,10 +33,6 @@ function loginUser(email, password) {
             console.error(`ErrorCode: ${errorCode} -> Message: ${errorMessage}`);
         });
 }
-
-onValue(playerRef, (snapshot) => {
-    getPlayerData();
-});
 
 function writeUserData(level, name, health) {
     console.log("Creating User");
