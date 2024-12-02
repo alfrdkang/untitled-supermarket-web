@@ -1,5 +1,17 @@
+import { getNumberOfPlayers, getTotalShiftsCompleted }  from './DatabaseManager.js';
+
 const ctx = document.getElementById('myChart').getContext('2d');
 const ctx2 = document.getElementById('myChart2').getContext('2d');
+const playerCountText = document.getElementById('playerCountText');
+const shiftsCompletedText = document.getElementById('shiftsCompletedText');
+
+getNumberOfPlayers().then(playerCount => {
+    playerCountText.innerHTML =  playerCount;
+  });
+
+getTotalShiftsCompleted().then(shiftsCompleted => {
+    shiftsCompletedText.innerHTML = shiftsCompleted;
+});
 
 const myChart = new Chart(ctx, {
 type: 'bar', // Chart type (e.g., line, bar, pie, etc.)

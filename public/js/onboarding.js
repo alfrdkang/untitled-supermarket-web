@@ -1,13 +1,5 @@
 import { createUser, loginUser, resetPassword } from './DatabaseManager.js';
 
-// document.getElementById('createBtn').addEventListener("click", () => {
-//     writeUserData(
-//         document.getElementById('create-level').value,
-//         document.getElementById('create-name').value,
-//         document.getElementById('create-health').value
-//     );
-// });
-
 // Sign Up
 document.getElementById('signupbtn').addEventListener("click", () => {
     console.log("signup!")

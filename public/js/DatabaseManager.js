@@ -1,10 +1,18 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
 import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { app } from './config.js';
 
 const db = getDatabase(app);
 const auth = getAuth(app);
 const playerRef = ref(db, "players");
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log('Logged-in UID:', user.uid);
+    } else {
+      console.log('No user is signed in.');
+    }
+  });
 
 function createUser(username, email, password) {
     console.log("Creating the user...");
@@ -114,6 +122,90 @@ function getPlayerData() {
         });
 }
 
+
+async function getNumberOfPlayers() {
+    const db = getDatabase();
+    const playersRef = ref(db, 'players');
+  
+    try {
+      const snapshot = await get(playersRef);
+      if (snapshot.exists()) {
+        const playersData = snapshot.val();
+
+        const playerCount = Array.isArray(playersData)
+          ? playersData.filter(player => player !== null).length
+          : Object.keys(playersData).length;
+        return playerCount;
+      } else {
+        console.log("No players found in the database.");
+        return 0;
+      }
+    } catch (error) {
+      console.error("Error fetching player data:", error);
+      return 0;
+    }
+}
+
+async function getTotalShiftsCompleted() {
+  const db = getDatabase();
+  const playersRef = ref(db, 'players');
+
+  try {
+    const snapshot = await get(playersRef);
+    if (snapshot.exists()) {
+      const playersData = snapshot.val();
+      let totalShiftsCompleted = 0;
+
+      for (const userId in playersData) {
+        const player = playersData[userId];
+        if (player.shiftsCompleted) {
+          totalShiftsCompleted += player.shiftsCompleted;
+        }
+      }
+
+      return totalShiftsCompleted;
+    } else {
+      console.log("No player data found.");
+      return 0;
+    }
+  } catch (error) {
+    console.error("Error fetching player data:", error);
+    return 0;
+  }
+}
+
+async function getPlayerDetails(uid) {
+    try {
+        // Fetch user authentication details from Firebase Auth (client-side)
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (!user || user.uid !== uid) {
+            throw new Error("User is not authenticated or UID does not match the current user");
+        }
+
+        // Fetch user details from Realtime Database (client-side)
+        const db = getDatabase();
+        const dbRef = ref(db, `players/${uid}`);
+        const dbSnapshot = await get(dbRef);
+        
+        if (!dbSnapshot.exists()) {
+            throw new Error(`No database details found for UID: ${uid}`);
+        }
+
+        return {
+            auth: {
+                uid: user.uid,
+                email: user.email,
+            },
+            db: dbSnapshot.val(),
+        };
+    } catch (error) {
+        console.error(`Error fetching player details for UID: ${uid}`, error);
+        throw error;
+    }
+}
+
 // Account Validation Function
 function handleAuthExceptions(error) {
     let validationText = "";
@@ -161,4 +253,4 @@ function handleAuthExceptions(error) {
 }
 
 
-export { getPlayerData, createUser, loginUser, resetPassword }
+export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails }
