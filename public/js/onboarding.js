@@ -4,11 +4,13 @@ import { createUser, loginUser, resetPassword } from './DatabaseManager.js';
 document.getElementById('signupbtn').addEventListener("click", () => {
     console.log("signup!")
     if ((document.getElementById('signuppassword').value) == (document.getElementById('signupconfirmpassword').value)) {
-        createUser(
+        if(createUser(
             document.getElementById('signupusername').value,
             document.getElementById('signupemail').value,
             document.getElementById('signuppassword').value
-        )
+        )) {
+            //window.location.href = 'admin.html';
+        }
     } else {
         console.log("Please Ensure That the Passwords Match!")
     }
@@ -17,10 +19,12 @@ document.getElementById('signupbtn').addEventListener("click", () => {
 // Log in
 document.getElementById('loginbtn').addEventListener("click", () => {
     console.log("login!")
-    loginUser(
+    if (loginUser(
         document.getElementById('loginemail').value,  
         document.getElementById('loginpassword').value
-    )
+    )) {
+        window.location.href = 'admin.html';
+    }
 });
 
 document.getElementById('resetpwbtn').addEventListener("click", () => {
@@ -29,7 +33,6 @@ document.getElementById('resetpwbtn').addEventListener("click", () => {
         document.getElementById('resetpwemail').value,  
     )
 });
-
 
 // Switch Pages Functions
 document.getElementById('loginherebtn').addEventListener("click", () => { 

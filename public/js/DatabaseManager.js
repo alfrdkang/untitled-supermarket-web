@@ -1,5 +1,5 @@
-import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
-import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateEmail, updatePassword, signOut, deleteUser } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+import { getDatabase, child, ref, set, get, push, update, remove } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { app } from './config.js';
 
 const db = getDatabase(app);
@@ -14,7 +14,7 @@ onAuthStateChanged(auth, (user) => {
     }
   });
 
-function createUser(username, email, password) {
+async function createUser(username, email, password) {
     console.log("Creating the user...");
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -22,26 +22,97 @@ function createUser(username, email, password) {
             console.log("User created successfully: ", JSON.stringify(user));
 
             // write user data to the database
-            writeNewUser(user.uid, username, "", false, 0, 0, 0, 0, 0, 0);
+            writeNewUser(user.uid, username, "", false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            return true
         })
         .catch((error) => {
             console.error("Error creating user: ", handleAuthExceptions(error));
+
+            return false
         });
 }
 
-function loginUser(email, password) {
+async function loginUser(email, password) {
     console.log("Logging in the user...");
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
             console.log("User logged in successfully: ", JSON.stringify(user));
+
+            return true
         })
         .catch((error) => {
             console.error("Error logging in: ", handleAuthExceptions(error));
+
+            return false
         });
 }
 
-function writeNewUser(uid, name, storeName, isAdmin, shiftsCompleted, customersServed, itemsScanned, mistakesMade, profitsEarned, highScore) {
+async function changeEmail(email) {
+    updateEmail(auth.currentUser, email)
+    .then(() => {
+        console.log("Email updated successfully: ", JSON.stringify(user));
+    }).catch((error) => {
+        console.error("Error changing email: ", handleAuthExceptions(error));
+    });
+}
+
+async function changePassword(password) {
+    updatePassword(auth.currentUser, password)
+    .then(() => {
+        console.log("Password updated successfully: ", JSON.stringify(user));
+    }).catch((error) => {
+        console.error("Error changing password: ", handleAuthExceptions(error));
+    });
+}
+
+async function changeUsername(username) {
+    const updateData = {
+      username: username
+    };
+  
+    const updates = {};
+    updates['/players/' + auth.currentUser.uid + '/name'] = username;
+  
+    return update(ref(db), updates);
+}
+
+async function reauthenticateAuth(email, password) {
+    var credential = firebase.auth.EmailAuthProvider.credential(
+        email,
+        password
+      );
+            
+      user.reauthenticateWithCredential(credential)
+      .then(() => {
+        console.log("Reauthentication Successful: ", JSON.stringify(user));
+        return true
+    }).catch((error) => {
+        console.error("Reauthentication Unsuccessful: ", handleAuthExceptions(error));
+        return false
+    });
+}
+
+async function deleteAccount() {
+    // Delete Auth Account
+    deleteUser(auth.currentUser).then(() => {
+        console.log("account deleted")
+      }).catch((error) => {
+        console.error("Reauthentication Unsuccessful: ", handleAuthExceptions(error));
+    });
+
+    //Delete Db Account
+    uid = auth.currentUser.uid
+    try {
+      await remove(ref(db, `players/${uid}`));
+      console.log(`Player data with ID ${uid} has been deleted.`);
+    } catch (error) {
+      console.error("Error deleting player data:", error);
+    }
+}
+
+function writeNewUser(uid, name, storeName, isAdmin, shiftsCompleted, customersServed, itemsScanned, profitsEarned, highScore, proficiencyScore, averageTimePerTransaction, restrictedSalesToMinors, excessChangeGiven, insufficientChangeGiven, customersOvercharged, customersUndercharged, insufficientCustomerPayment) {
     const userRef = ref(db, `players/${uid}`);
 
     set(userRef, {
@@ -51,9 +122,18 @@ function writeNewUser(uid, name, storeName, isAdmin, shiftsCompleted, customersS
         shiftsCompleted: shiftsCompleted,
         customersServed: customersServed,
         itemsScanned: itemsScanned,
-        mistakesMade: mistakesMade,
         profitsEarned: profitsEarned,
-        highScore: highScore
+        highScore: highScore,
+        proficiencyScore: proficiencyScore,
+        averageTimePerTransaction: averageTimePerTransaction,
+        mistakesMade: {
+            restrictedSalesToMinors: restrictedSalesToMinors,
+            excessChangeGiven: excessChangeGiven,
+            insufficientChangeGiven: insufficientChangeGiven,
+            customersOvercharged: customersOvercharged,
+            customersUndercharged: customersUndercharged,
+            insufficientCustomerPayment: insufficientCustomerPayment
+        },
     })
         .then(() => {
             console.log("User data successfully written!");
@@ -253,4 +333,4 @@ function handleAuthExceptions(error) {
 }
 
 
-export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails }
+export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails, changeUsername, changeEmail, changePassword, reauthenticateAuth, deleteAccount }

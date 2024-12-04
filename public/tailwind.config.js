@@ -1,5 +1,8 @@
 tailwind.config = {
     theme: {
+      fontFamily: {
+        'dynapuff': ['DynaPuff', 'sans-serif'],
+      },
       extend: {
         colors: {
           'yellow': '#ffe11d',
@@ -8,9 +11,6 @@ tailwind.config = {
           'pink': '#ee3253',
           'brown': '#844d38',
           'dblue': '#302e3c',
-        },
-        fontFamily: {
-            'concert': ['Concert One', 'sans-serif'],
         },
         animation: {
           'spin-slow': 'spin 10s linear infinite',

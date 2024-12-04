@@ -7,165 +7,177 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hanuman:wght@100;300;400;700;900&family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
+
 </head> 
-    <body class="bg-dblue h-screen w-screen overflow-hidden">
+    <body class="bg-dblue h-screen w-screen font-dynapuff">
         <nav class="border-gray-200 bg-pink">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="img/supermarketbg.jpg" class="h-8" alt="Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap text-cream">untitled supermarket simulator</span>
             </a>
-            <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="" alt="user photo">
-                </button>
-                <!-- Dropdown menu -->
-                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-                <div class="px-4 py-3">
-                    <span class="block text-sm hover:text-blue text-cream">Alfred Kang</span>
-                    <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">alfred@gmail.com</span>
-                </div>
-                <ul class="py-2" aria-labelledby="user-menu-button">
-                    <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-cream">Dashboard</a>
-                    </li>
-                    <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-cream">Settings</a>
-                    </li>
-                    <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-cream">Earnings</a>
-                    </li>
-                    <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-cream">Sign out</a>
-                    </li>
-                </ul>
-                </div>
-                <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
-                <span class="sr-only">Open main menu</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                </svg>
-            </button>
-            </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-            <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-pink md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:border-gray-700">
+            <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:borde7-0">
                 <li>
-                <a href="#" class="block py-2 px-3 text-yellow bg-blue-700 rounded md:p-0">Admin</a>
+                <a href="admin.html" class="block py-2 px-3 text-cream bg-blue-700 rounded md:p-0">Admin</a>
                 </li>
                 <li>
-                <a href="#" class="block py-2 px-3 text-cream hover:text-blue rounded md:p-0">Home</a>
+                <a href="#" class="block py-2 px-3 text-cream hover:text-blue rounded md:p-0">Play</a>
                 </li>
                 <li>
                 <a href="#" class="block py-2 px-3 text-cream hover:text-blue rounded md:p-0">Leaderboard</a>
                 </li>
                 <li>
-                <a href="#" class="block py-2 px-3 text-cream hover:text-blue rounded md:p-0">Pricing</a>
-                </li>
-                <li>
-                <a href="#" class="block py-2 px-3 text-cream hover:text-blue rounded md:p-0">Contact</a>
+                <a href="#" class="block py-2 px-3 text-yellow hover:text-blue rounded md:p-0">Settings</a>
                 </li>
             </ul>
             </div>
             </div>
         </nav>
         <div class="mx-4 min-h-screen max-w-screen-xl sm:mx-8 xl:mx-auto dark:bg-dblue dark:text-gray-200">
-            <h1 class="border-b border-gray-200 py-6 text-4xl font-semibold dark:border-gray-700">Settings</h1>
+            <h1 class="border-b border-gray-200 py-6 text-4xl font-semib7ld">Settings</h1>
             <div class="grid grid-cols-8 pt-3 sm:grid-cols-10">
-              <div class="relative my-4 w-56 sm:hidden">
-                <input class="peer hidden" type="checkbox" name="select-1" id="select-1" />
-                <label for="select-1"
-                  class="flex w-full cursor-pointer select-none rounded-lg border p-2 px-3 text-sm text-gray-700 ring-blue-700 peer-checked:ring dark:border-gray-700 dark:text-gray-200">
-                  Accounts
-                </label>
-                <svg xmlns="http://www.w3.org/2000/svg"
-                  class="pointer-events-none absolute right-0 top-3 ml-auto mr-5 h-4 text-slate-700 transition peer-checked:rotate-180 dark:text-gray-400"
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-                <ul
-                  class="max-h-0 select-none flex-col overflow-hidden rounded-b-lg shadow-md transition-all duration-300 peer-checked:max-h-56 peer-checked:py-3 dark:bg-gray-800">
-                  <li class="cursor-pointer px-3 py-2 text-sm text-slate-600 hover:bg-blue-700 hover:text-white dark:text-gray-300 dark:hover:bg-blue-600">
-                    Accounts</li>
-                  <li class="cursor-pointer px-3 py-2 text-sm text-slate-600 hover:bg-blue-700 hover:text-white dark:text-gray-300 dark:hover:bg-blue-600">
-                    Team</li>
-                  <li class="cursor-pointer px-3 py-2 text-sm text-slate-600 hover:bg-blue-700 hover:text-white dark:text-gray-300 dark:hover:bg-blue-600">
-                    Others</li>
-                </ul>
-              </div>
-          
               <div class="col-span-2 hidden sm:block">
                 <ul>
                   <li
-                    class="mt-5 cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition dark:border-blue-400 dark:text-blue-400">
+                    class="mt-5 cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition dark:border-blue-400 dark:text-blue-400" id="accountSettingsBtn">
                     Account</li>
                   <li
-                    class="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400">
-                    Users</li>
-                  <li
-                    class="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400">
-                    Profile</li>
-                  <li
-                    class="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400">
-                    Billing</li>
-                  <li
-                    class="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400">
-                    Notifications</li>
-                  <li
-                    class="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400">
-                    Integrations</li>
+                    class="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400"  id="storeSettingsBtn">
+                    Store</li>
                 </ul>
               </div>
           
-              <div class="col-span-8 overflow-hidden rounded-xl sm:px-8">
+              <div class="col-span-8 overflow-hidden rounded-xl sm:px-8" id="accountSettingsModal">
                 <div class="pt-4">
                   <h1 class="py-2 text-3xl font-semibold">Account settings</h1>
                 </div>
-                <hr class="mt-4 mb-8 border-gray-300 dark:border-gray-700" />
+                <hr class="mt-4 mb-8 border-gray-700" />
                 <p class="py-2 text-xl font-semibold">Username</p>
-                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex flex-col py-3 sm:flex-row sm:items-center sm:justify-between">
                   <p class="text-gray-300" id="usernameText"><strong>AlfredKang</strong></p>
                   <button class="inline-flex text-sm font-semibold text-blue-600 underline decoration-2 dark:text-blue-400" id="changeUsernameBtn">
                     Change</button>
                 </div>
-                <hr class="mt-4 mb-8 border-gray-300 dark:border-gray-700" />
+                <div class="hidden" id="changeUsernameLabel">
+                    <label>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">New Username</span>
+                        <div
+                        class="w-1/2 relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-700">
+                        <input type="text"
+                            class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-n7ne dark:bg-gray-800 dark:text-gray-200" id="newUsernameText"/>
+                        </div>
+                    </label>
+                    <button class="py-5 inline-flex text-sm font-semibold text-blue-600 underline decoration-2 dark:text-blue-400" id="changeUsernameCfmBtn">
+                        Change Username</button>
+                </div>
+                <hr class="mt-4 mb-8 border-gray-700" />
                 <p class="py-2 text-xl font-semibold">Email Address</p>
-                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                  <p class="text-gray-300" id="emailText">Your email address is <strong>alfredkangjr@gmail.com</strong></p>
+                <div class="flex flex-col py-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p class="text-gray-300" id="emailText"><strong>alfredkangjr@gmail.com</strong></p>
                   <button class="inline-flex text-sm font-semibold text-blue-600 underline decoration-2 dark:text-blue-400" id="changeEmailBtn">
                     Change</button>
                 </div>
-                <hr class="mt-4 mb-8 border-gray-300 dark:border-gray-700" />
+                <div class="hidden" id="changeEmailLabel">
+                    <label>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">New Email</span>
+                        <div
+                        class="w-1/2 relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-700">
+                        <input type="text"
+                            class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-n7ne dark:bg-gray-800 dark:text-gray-200" id="newEmailText"/>
+                        </div>
+                    </label>
+                    <button class="py-5 inline-flex text-sm font-semibold text-blue-600 underline decoration-2 dark:text-blue-400" id="changeEmailCfmBtn">
+                        Update Email</button>
+                </div>
+                <hr class="mt-4 mb-8 border-gray-700" />
                 <p class="py-2 text-xl font-semibold">Password</p>
                 <div class="flex items-center">
                   <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-3">
                     <label>
                       <span class="text-sm text-gray-500 dark:text-gray-400">Current Password</span>
                       <div
-                        class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600 dark:border-gray-700">
+                        class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-700">
                         <input type="password"
-                          class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" id="currentPasswordText"/>
+                          class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-n7ne dark:bg-gray-800 dark:text-gray-200" id="currentPasswordText"/>
                       </div>
                     </label>
                     <label>
                       <span class="text-sm text-gray-500 dark:text-gray-400">New Password</span>
                       <div
-                        class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600 dark:border-gray-700">
+                        class="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-700">
                         <input type="password"
-                          class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200" id="newPasswordText"/>
+                          class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-n7ne dark:bg-gray-800 dark:text-gray-200" id="newPasswordText"/>
                       </div>
                     </label>
                   </div>
                 </div>
                 <p class="py-8 text-gray-300 text-mg font-semibold underline" id="changePasswordBtn">Change Password</p>
-                <hr class="mt-4 mb-8 border-gray-300 dark:border-gray-700" />
-                <p class="py-8 text-pink text-xl font-semibold" id="deleteAccountBtn">Delete Account</p>
+                <hr class="mt-4 mb-8 border-gray-700" />
+                <p class="py-8 text-pink text-xl font-semibold" id="deleteAccountBtn">Deactivate and Delete Account</p>
+              </div>
+              <div class="hidden col-span-8 overflow-hidden rounded-xl sm:px-8" id="storeSettingsModal">
+                <div class="pt-4">
+                  <h1 class="py-2 text-3xl font-semibold">Store settings</h1>
+                </div>
+                <hr class="mt-4 mb-8 border-gray-700" />
+                <p class="py-2 text-xl font-semibold">Store Name</p>
+                <div class="flex flex-col py-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p class="text-gray-300" id="storeNameText"><strong>untitled</strong></p>
+                  <button class="inline-flex text-sm font-semibold text-blue-600 underline decoration-2 dark:text-blue-400" id="changeStoreNameBtn">
+                    Change</button>
+                </div>
+                <div class="hidden" id="changeStoreNameLabel">
+                    <label>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">New Store Name</span>
+                        <div
+                        class="w-1/2 relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-700">
+                        <input type="text"
+                            class="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-n7ne dark:bg-gray-800 dark:text-gray-200" id="newStoreNameText"/>
+                        </div>
+                    </label>
+                    <button class="py-5 inline-flex text-sm font-semibold text-blue-600 underline decoration-2 dark:text-blue-400" id="changeStoreNameCfmBtn">
+                        Change Store Name</button>
+                </div>
+                <hr class="mt-4 mb-8 border-gray-700" />
+                <p class="py-8 text-pink text-xl font-semibold" id="deleteStoreBtn">Delete Store</p>
               </div>
             </div>
-        </div>
+        </div>    
+        <div class="hidden relative z-10" id="confirmationModal">
+            <div class="fixed inset-0 bg-gray-900/75 transition-opacity"></div>
+          
+            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+              <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                  <div class="bg-dblue px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                      <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
+                        <svg class="size-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                        </svg>
+                      </div>
+                      <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                        <p class="text-xl text-red-400" id="modal-title">Deactivate and Delete account</p>
+                        <div class="mt-2">
+                          <p class="text-sm text-white">Are you sure you want to deactivate and delete your account? All of your data will be permanently removed. This action cannot be undone.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-dblue px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                    <button type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" id="deleteAccountCfmBtn">Deactivate and Delete</button>
+                    <button type="button" class="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"  id="deleteAccountCancelBtn">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
 
         <script type="module" src="js/index.js"></script>
+        <script type="module" src="js/nav.js"></script>
         <script type="module" src="js/settings.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="tailwind.config.js"></script>
