@@ -11,6 +11,7 @@ tailwind.config = {
           'pink': '#ee3253',
           'brown': '#844d38',
           'dblue': '#302e3c',
+          'green': '#32eec4'
         },
         animation: {
           'spin-slow': 'spin 10s linear infinite',

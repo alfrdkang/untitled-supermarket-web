@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
 </head> 
-    <body class="flex flex-col bg-dblue h-screen w-screen font-dynapuff overflow-hidden">
-        <nav class="border-gray-200 bg-pink">
+    <body class="flex flex-col bg-dblue h-screen w-screen items-center font-dynapuff overflow-hidden">
+        <nav class="border-gray-200 bg-pink w-full">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="img/supermarketbg.jpg" class="h-8" alt="Logo" />
@@ -19,10 +19,10 @@
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
             <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-pink md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:border-gray-700">
                 <li>
-                <a href="#" class="block py-2 px-3 text-yellow bg-blue-700 rounded md:p-0">Admin</a>
+                <a href="#" class="block py-2 px-3 text-cream bg-blue-700 rounded md:p-0">Admin</a>
                 </li>
                 <li>
-                <a href="#" class="block py-2 px-3 text-cream hover:text-blue rounded md:p-0">Play</a>
+                <a href="#" class="block py-2 px-3 text-yellow hover:text-blue rounded md:p-0">Play</a>
                 </li>
                 <li>
                 <a href="#" class="block py-2 px-3 text-cream hover:text-blue rounded md:p-0">Leaderboard</a>
@@ -34,40 +34,30 @@
             </div>
             </div>
         </nav>
-        <div class="flex flex-col mb-4 m-7 h-full">
-            <div class=" flex flex-row h-2/5 w-full">
-                <div class="w-1/3 h-full p-3">
-                    <div class="flex flex-col outline outline-2 h-full outline-cream rounded-3xl p-9 justify-center">
-                        <p class="text-3xl text-cream p-1">Total Number of Players:</p>
-                        <p class="font-bold text-5xl text-cream p-2" id="playerCountText">0</p>
-                    </div>
-                </div>
-                <div class="w-1/3 h-full p-3">
-                    <div class="flex flex-col outline outline-2 h-full outline-cream rounded-3xl p-9 justify-center">
-                        <p class="text-3xl text-cream p-1">Number of Active Players:</p>
-                        <p class="font-bold text-5xl text-cream p-2" id="activePlayersText">0</p>
-                    </div>
-                </div>
-                <div class="w-1/3 h-full p-3">
-                    <div class="flex flex-col outline outline-2 h-full outline-cream rounded-3xl p-9 justify-center">
-                        <p class="text-3xl text-cream p-1">Total Shifts Completed:</p>
-                        <p class="font-bold text-5xl text-cream p-2" id="shiftsCompletedText">256</p>
+        <p class="flex justify-center text-5xl text-cream py-4 mt-6" id="lobbyTitle">Starting Cashier Shift: PlayerUsername...</p>
+        <div class="flex flex-row p-3 h-full w-full">
+            <div class="h-full w-1/2">
+                <div class="w-full h-full p-5">
+                    <div class="flex flex-col outline outline-2 h-full outline-cream rounded-3xl p-9 justify-center text-cream items-center bg-pink" id="vrReadyBG">
+                        <p class="text-5xl p-1">Player 1: VR</p>
+                        <p class="text-7xl p-6" id="vrReadyStatusText">NOT READY</p>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-row h-3/5 w-full">
-                <div class="w-1/2 h-full p-3">
-                    <canvas class="outline outline-2 outline-cream rounded-3xl p-9" id="myChart"></canvas>
-                </div>
-                <div class="w-1/2 h-full p-3">
-                    <canvas class="outline outline-2 outline-cream rounded-3xl p-9" id="myChart2"></canvas>
+            <div class="h-full w-1/2">
+                <div class="w-full h-full p-5">
+                    <div class="flex flex-col outline outline-2 h-full outline-cream rounded-3xl p-9 justify-center items-center text-cream bg-pink" id="webReadyBG">
+                        <p class="text-5xl p-1">Player 2: Web</p>
+                        <p class="text-7xl p-6" id="webReadyStatusText">NOT READY</p>
+                    </div>
                 </div>
             </div>
         </div>
+        <button type="button" class="mb-5 h-1/6 w-1/3 justify-self-center items-center rounded-xl bg-red-600 text-3xl font-semibold text-white shadow-sm hover:bg-red-500" id="readyBtn">Ready</button>
 
         <script type="module" src="js/index.js"></script>
         <script type="module" src="js/nav.js"></script>
-        <script type="module" src="js/admindashboard.js"></script>
+        <script type="module" src="js/lobby.js"></script>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="tailwind.config.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>

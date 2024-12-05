@@ -1,6 +1,7 @@
 import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateEmail, updatePassword, signOut, deleteUser } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
-import { getDatabase, child, ref, set, get, push, update, remove } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+import { getDatabase, child, ref, set, get, push, update, remove, onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { app } from './config.js';
+import { changeVRReadyStatus } from './lobby.js';
 
 const db = getDatabase(app);
 const auth = getAuth(app);
@@ -202,7 +203,6 @@ function getPlayerData() {
         });
 }
 
-
 async function getNumberOfPlayers() {
     const db = getDatabase();
     const playersRef = ref(db, 'players');
@@ -332,5 +332,46 @@ function handleAuthExceptions(error) {
     return validationText;
 }
 
+async function gameSessionListen(uid) {
+    const sessionRef = ref(db, `sessions/${uid}`);
+  
+    try {
+      const snapshot = await get(sessionRef);
+      if (!snapshot.exists()) {
+        console.log("Session does not exist. Creating it...");
+        set(sessionRef, { 
+          createdAt: convertNowToTimestamp(), 
+          currentCustomerIndex: 0,
+          gameConnected: false,
+          webConnected: false,
+          timeElapsed: 0
+        });
+        console.log("Session created successfully.");
+      } else {
+        console.log("Session already exists.");
+      }
+  
+      onValue(sessionRef, (snapshot) => {
+        if (snapshot.exists()) {
+            console.log("Session data changed:", snapshot.val());
+            changeVRReadyStatus(snapshot.child("gameConnected").val());
+        } else {
+          console.log("Session data has been deleted.");
+        }
+      }, (error) => {
+        console.error("Error listening for changes:", error);
+      });
+  
+    } catch (error) {
+      console.error("Error checking or creating session:", error);
+    }
+}
 
-export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails, changeUsername, changeEmail, changePassword, reauthenticateAuth, deleteAccount }
+function convertNowToTimestamp() {
+    const now = new Date();
+    const timestamp = Math.floor(now.getTime() / 1000);
+    return timestamp.toString();
+}
+  
+
+export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails, changeUsername, changeEmail, changePassword, reauthenticateAuth, deleteAccount, gameSessionListen }
