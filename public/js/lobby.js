@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
             // Display Data
             lobbyTitle.innerHTML = "Starting Cashier Shift: " + playerDetails.db.name + "...";
-            gameSessionListen(user.uid)
+            gameSessionListen(user.uid, changeVRReadyStatus)
 
         } catch (error) {
             console.error("Error fetching player details:", error);
@@ -56,22 +56,22 @@ document.addEventListener("DOMContentLoaded", () => {
             webReadyStatusText.innerHTML = "NOT READY"
         }
     }
-})
 
-export function changeVRReadyStatus(vrReadyStatus) {
-    if (vrReadyStatus == true) {
-        console.log("vr ready!")
-        vrReadyBG.classList.remove("bg-pink")
-        vrReadyBG.classList.add("bg-green")
-        vrReadyBG.classList.remove("text-cream")
-        vrReadyBG.classList.add("text-brown")
-        vrReadyStatusText.innerHTML = "READY"
-    } else {
-        console.log("vr not ready!")
-        vrReadyBG.classList.add("bg-pink")
-        vrReadyBG.classList.remove("bg-green")
-        vrReadyBG.classList.add("text-cream")
-        vrReadyBG.classList.remove("text-brown")
-        vrReadyStatusText.innerHTML = "NOT READY"
+    function changeVRReadyStatus(vrReadyStatus) {
+        if (vrReadyStatus == true) {
+            console.log("vr ready!")
+            vrReadyBG.classList.remove("bg-pink")
+            vrReadyBG.classList.add("bg-green")
+            vrReadyBG.classList.remove("text-cream")
+            vrReadyBG.classList.add("text-brown")
+            vrReadyStatusText.innerHTML = "READY"
+        } else {
+            console.log("vr not ready!")
+            vrReadyBG.classList.add("bg-pink")
+            vrReadyBG.classList.remove("bg-green")
+            vrReadyBG.classList.add("text-cream")
+            vrReadyBG.classList.remove("text-brown")
+            vrReadyStatusText.innerHTML = "NOT READY"
+        }
     }
-}
+})

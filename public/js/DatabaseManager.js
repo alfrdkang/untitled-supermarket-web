@@ -1,7 +1,6 @@
 import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateEmail, updatePassword, signOut, deleteUser } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
-import { getDatabase, child, ref, set, get, push, update, remove, onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+import { getDatabase, child, ref, set, get, push, update, remove, onValue, orderByChild, query } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { app } from './config.js';
-import { changeVRReadyStatus } from './lobby.js';
 
 const db = getDatabase(app);
 const auth = getAuth(app);
@@ -332,7 +331,7 @@ function handleAuthExceptions(error) {
     return validationText;
 }
 
-async function gameSessionListen(uid) {
+async function gameSessionListen(uid, changeVRReadyStatus) {
     const sessionRef = ref(db, `sessions/${uid}`);
   
     try {
@@ -340,7 +339,7 @@ async function gameSessionListen(uid) {
       if (!snapshot.exists()) {
         console.log("Session does not exist. Creating it...");
         set(sessionRef, { 
-          createdAt: convertNowToTimestamp(), 
+          createdOn: convertNowToTimestamp(), 
           currentCustomerIndex: 0,
           gameConnected: false,
           webConnected: false,
@@ -367,6 +366,21 @@ async function gameSessionListen(uid) {
     }
 }
 
+async function getLeaderboardData(sort, updateLeaderboard) {  
+    // Define the query based on the "sort" parameter
+    const playersQuery = query(playerRef, orderByChild(sort));
+  
+    // Use async/await with the onValue function to fetch data
+    onValue(playersQuery, (snapshot) => {
+      if (snapshot.exists()) {
+        updateLeaderboard(snapshot, sort);
+      } else {
+        console.error("No data available");
+      }
+    });
+}
+
+
 function convertNowToTimestamp() {
     const now = new Date();
     const timestamp = Math.floor(now.getTime() / 1000);
@@ -374,4 +388,4 @@ function convertNowToTimestamp() {
 }
   
 
-export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails, changeUsername, changeEmail, changePassword, reauthenticateAuth, deleteAccount, gameSessionListen }
+export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails, changeUsername, changeEmail, changePassword, reauthenticateAuth, deleteAccount, gameSessionListen, getLeaderboardData }
