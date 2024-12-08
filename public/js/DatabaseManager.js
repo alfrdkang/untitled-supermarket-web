@@ -143,7 +143,7 @@ function writeNewUser(uid, name, storeName, isAdmin, shiftsCompleted, customersS
         });
 }
 
-function resetPassword(email) {
+async function resetPassword(email) {
     sendPasswordResetEmail(auth, email)
         .then(() => {
             console.log("Password reset email sent successfully.");
@@ -153,7 +153,7 @@ function resetPassword(email) {
         });
 }
 
-function getPlayerData() {
+async function getPlayerData() {
     console.log("getting player data")
     get(playerRef)
         .then((snapshot) => {
