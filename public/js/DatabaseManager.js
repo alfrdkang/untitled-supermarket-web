@@ -331,7 +331,7 @@ function handleAuthExceptions(error) {
     return validationText;
 }
 
-async function gameSessionListen(uid, changeVRReadyStatus) {
+async function lobbySessionListen(uid, changeVRReadyStatus) {
     const sessionRef = ref(db, `sessions/${uid}`);
   
     try {
@@ -366,6 +366,57 @@ async function gameSessionListen(uid, changeVRReadyStatus) {
     }
 }
 
+async function updateWebReadyStatus(status) {
+  const updateData = {
+    webConnected: status
+  };
+
+  const updates = {};
+  updates['/sessions/' + auth.currentUser.uid + '/webConnected'] = status;
+
+  return update(ref(db), updates);
+}
+
+async function gameSessionListen(uid, displayCurrentCustomerID) {
+  const sessionRef = ref(db, `sessions/${uid}/customer`);
+
+  try {
+    const snapshot = await get(sessionRef);
+    if (!snapshot.exists()) {
+      console.log("Session does not exist. Creating it...");
+      set(sessionRef, { 
+        createdOn: convertNowToTimestamp(), 
+        currentCustomerIndex: 0,
+        gameConnected: false,
+        webConnected: false,
+        timeElapsed: 0
+      });
+      console.log("Session created successfully.");
+    } else {
+      console.log("Session already exists.");
+    }
+
+    onValue(sessionRef, (snapshot) => {
+      if (snapshot.exists()) {
+          console.log("Session data changed:", snapshot.val());
+          displayCurrentCustomerID(
+            snapshot.child("dateOfBirth").val(),
+            snapshot.child("fullName").val(),
+            snapshot.child("isFake").val(),
+            snapshot.child("spriteIndex").val(),
+          );
+      } else {
+        console.log("Session data has been deleted.");
+      }
+    }, (error) => {
+      console.error("Error listening for changes:", error);
+    });
+
+  } catch (error) {
+    console.error("Error checking or creating session:", error);
+  }
+}
+
 async function getLeaderboardData(sort, updateLeaderboard) {  
     // Define the query based on the "sort" parameter
     const playersQuery = query(playerRef, orderByChild(sort));
@@ -388,4 +439,4 @@ function convertNowToTimestamp() {
 }
   
 
-export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails, changeUsername, changeEmail, changePassword, reauthenticateAuth, deleteAccount, gameSessionListen, getLeaderboardData }
+export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails, changeUsername, changeEmail, changePassword, reauthenticateAuth, deleteAccount, lobbySessionListen, gameSessionListen, getLeaderboardData, updateWebReadyStatus }

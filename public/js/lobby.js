@@ -1,4 +1,4 @@
-import { getPlayerDetails, auth, gameSessionListen } from './DatabaseManager.js';
+import { getPlayerDetails, auth, lobbySessionListen, updateWebReadyStatus } from './DatabaseManager.js';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const lobbyTitle = document.getElementById('lobbyTitle')
 
     var webReadyStatus = false
+    var gameReadyStatus = false
 
     auth.onAuthStateChanged(async (user) => {
         if (user) {
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
             // Display Data
             lobbyTitle.innerHTML = "Starting Cashier Shift: " + playerDetails.db.name + "...";
-            gameSessionListen(user.uid, changeVRReadyStatus)
+            lobbySessionListen(user.uid, changeVRReadyStatus)
 
         } catch (error) {
             console.error("Error fetching player details:", error);
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function changeWebReadyStatus() {
         if (webReadyStatus == false) {
+            updateWebReadyStatus(true)
             webReadyStatus = true
             webReadyBG.classList.remove("bg-pink")
             webReadyBG.classList.add("bg-green")
@@ -46,7 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
             webReadyBG.classList.add("text-brown")
             readyBtn.innerHTML = "Waiting for VR Player.."
             webReadyStatusText.innerHTML = "READY"
+            checkBothReady()
         } else {
+            updateWebReadyStatus(false)
             webReadyStatus = false
             webReadyBG.classList.add("bg-pink")
             webReadyBG.classList.remove("bg-green")
@@ -60,18 +64,27 @@ document.addEventListener("DOMContentLoaded", () => {
     function changeVRReadyStatus(vrReadyStatus) {
         if (vrReadyStatus == true) {
             console.log("vr ready!")
+            gameReadyStatus = true
             vrReadyBG.classList.remove("bg-pink")
             vrReadyBG.classList.add("bg-green")
             vrReadyBG.classList.remove("text-cream")
             vrReadyBG.classList.add("text-brown")
             vrReadyStatusText.innerHTML = "READY"
+            checkBothReady()
         } else {
+            gameReadyStatus = false
             console.log("vr not ready!")
             vrReadyBG.classList.add("bg-pink")
             vrReadyBG.classList.remove("bg-green")
             vrReadyBG.classList.add("text-cream")
             vrReadyBG.classList.remove("text-brown")
             vrReadyStatusText.innerHTML = "NOT READY"
+        }
+    }
+
+    function checkBothReady() {
+        if (gameReadyStatus == true && webReadyStatus == true) {
+            window.location.href= "game.html"
         }
     }
 })
