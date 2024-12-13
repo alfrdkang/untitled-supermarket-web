@@ -1,4 +1,4 @@
-import { getPlayerDetails, auth, changeEmail, changeUsername, changePassword, reauthenticateAuth, deleteAccount } from './DatabaseManager.js';
+import { getPlayerDetails, auth, changeEmail, changeUsername, changePassword, reauthenticateAuth, logoutAccount, deleteAccount } from './DatabaseManager.js';
 
 const usernameText = document.getElementById('usernameText');
 const emailText = document.getElementById('emailText');
@@ -60,6 +60,14 @@ document.getElementById('changeUsernameCfmBtn').addEventListener("click", () => 
     changeUsername(document.getElementById('newUsernameText').value)
 });
 
+// Log Out
+document.getElementById('logoutAccountBtn').addEventListener("click", () => {
+    console.log("Logout Account!")
+    if(logoutAccount()){
+        window.location.href = 'index.html'
+    }
+});
+
 // Delete or Deactivate Account
 document.getElementById('deleteAccountBtn').addEventListener("click", () => {
     console.log("Delete Account!")
@@ -75,7 +83,6 @@ document.getElementById('deleteAccountCfmBtn').addEventListener("click", () => {
 document.getElementById('deleteAccountCancelBtn').addEventListener("click", () => {
     console.log("Cancel: Delete Account")
     document.getElementById('confirmationModal').classList.add("hidden")
-
 });
 
 // Settings Page Switching

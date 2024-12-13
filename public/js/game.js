@@ -19,7 +19,7 @@ const mugshots = [
 ];
 
 // debug 
-loginUser("wahaha@email.com", "wahaha")
+loginUser("ut@g.com", "Password")
 
 auth.onAuthStateChanged(async (user) => {
     if (user) {

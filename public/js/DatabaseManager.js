@@ -9,6 +9,11 @@ const playerRef = ref(db, "players");
 onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('Logged-in UID:', user.uid);
+      console.log("moving you to lobby...")
+      // Run onboarding.js function if it is loaded
+      if (typeof switchToLobby === 'function') {
+        switchToLobby();
+      }
     } else {
       console.log('No user is signed in.');
     }
@@ -92,6 +97,18 @@ async function reauthenticateAuth(email, password) {
         console.error("Reauthentication Unsuccessful: ", handleAuthExceptions(error));
         return false
     });
+}
+
+async function logoutAccount() {
+  signOut(auth).then(() => {
+    console.log("User signed out!")
+
+    return true
+  }).catch((error) => {
+    console.error("Logout Unsuccessful: ", handleAuthExceptions(error));
+
+    return false
+});
 }
 
 async function deleteAccount() {
@@ -255,16 +272,12 @@ async function getTotalShiftsCompleted() {
 
 async function getPlayerDetails(uid) {
     try {
-        // Fetch user authentication details from Firebase Auth (client-side)
-        const auth = getAuth();
         const user = auth.currentUser;
 
         if (!user || user.uid !== uid) {
             throw new Error("User is not authenticated or UID does not match the current user");
         }
 
-        // Fetch user details from Realtime Database (client-side)
-        const db = getDatabase();
         const dbRef = ref(db, `players/${uid}`);
         const dbSnapshot = await get(dbRef);
         
@@ -283,52 +296,6 @@ async function getPlayerDetails(uid) {
         console.error(`Error fetching player details for UID: ${uid}`, error);
         throw error;
     }
-}
-
-// Account Validation Function
-function handleAuthExceptions(error) {
-    let validationText = "";
-
-    if (!error) {
-        validationText += "Unknown error occurred.";
-        return validationText;
-    }
-
-    // Firebase error codes
-    const errorCode = error.code; // Firebase error code
-    console.error("Error in auth.... error code: " + errorCode);
-
-    switch (errorCode) {
-        case 'auth/missing-email':
-            validationText += "Email field cannot be blank.";
-            break;
-        case 'auth/internal-error': // often caused by missing password apparently
-            validationText += "Password field cannot be blank.";
-            break;
-        case 'auth/wrong-password':
-            validationText += "Wrong Password";
-            break;
-        case 'auth/user-not-found':
-            validationText += "User does not exist, please create an account";
-            break;
-        case 'auth/invalid-email':
-            validationText += "Invalid Email";
-            break;
-        case 'auth/weak-password':
-            validationText += "Weak Password (Minimum 8 Characters, requires upper case letters, lower case letters, numbers)";
-            break;
-        case 'auth/email-already-in-use':
-            validationText += "Email is already in use, try logging in";
-            break;
-        case 'auth/user-mismatch':
-            validationText += "User Mismatch";
-            break;
-        default:
-            validationText += "Issue in authentication: " + errorCode;
-            break;
-    }
-
-    return validationText;
 }
 
 async function lobbySessionListen(uid, changeVRReadyStatus) {
@@ -431,12 +398,56 @@ async function getLeaderboardData(sort, updateLeaderboard) {
     });
 }
 
+// Account Validation Function
+function handleAuthExceptions(error) {
+  let validationText = "";
+
+  if (!error) {
+      validationText += "Unknown error occurred.";
+      return validationText;
+  }
+
+  // Firebase error codes
+  const errorCode = error.code; // Firebase error code
+  console.error("Error in auth.... error code: " + errorCode);
+
+  switch (errorCode) {
+      case 'auth/missing-email':
+          validationText += "Email field cannot be blank.";
+          break;
+      case 'auth/internal-error': // often caused by missing password apparently
+          validationText += "Password field cannot be blank.";
+          break;
+      case 'auth/wrong-password':
+          validationText += "Wrong Password";
+          break;
+      case 'auth/user-not-found':
+          validationText += "User does not exist, please create an account";
+          break;
+      case 'auth/invalid-email':
+          validationText += "Invalid Email";
+          break;
+      case 'auth/weak-password':
+          validationText += "Weak Password (Minimum 8 Characters, requires upper case letters, lower case letters, numbers)";
+          break;
+      case 'auth/email-already-in-use':
+          validationText += "Email is already in use, try logging in";
+          break;
+      case 'auth/user-mismatch':
+          validationText += "User Mismatch";
+          break;
+      default:
+          validationText += "Issue in authentication: " + errorCode;
+          break;
+  }
+
+  return validationText;
+}
 
 function convertNowToTimestamp() {
     const now = new Date();
     const timestamp = Math.floor(now.getTime() / 1000);
     return timestamp.toString();
 }
-  
 
-export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails, changeUsername, changeEmail, changePassword, reauthenticateAuth, deleteAccount, lobbySessionListen, gameSessionListen, getLeaderboardData, updateWebReadyStatus }
+export { auth, createUser, loginUser, resetPassword, getNumberOfPlayers, getTotalShiftsCompleted, getPlayerDetails, changeUsername, changeEmail, changePassword, reauthenticateAuth, logoutAccount, deleteAccount, lobbySessionListen, gameSessionListen, getLeaderboardData, updateWebReadyStatus }

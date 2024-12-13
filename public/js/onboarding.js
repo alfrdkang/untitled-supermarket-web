@@ -9,7 +9,7 @@ document.getElementById('signupbtn').addEventListener("click", () => {
             document.getElementById('signupemail').value,
             document.getElementById('signuppassword').value
         )) {
-            //window.location.href = 'admin.html';
+            switchToLobby();
         }
     } else {
         console.log("Please Ensure That the Passwords Match!")
@@ -23,7 +23,7 @@ document.getElementById('loginbtn').addEventListener("click", () => {
         document.getElementById('loginemail').value,  
         document.getElementById('loginpassword').value
     )) {
-        window.location.href = 'admin.html';
+        switchToLobby();
     }
 });
 
@@ -55,3 +55,9 @@ document.getElementById('resetpwherebtn').addEventListener("click", () => {
     document.getElementById('resetPWModal').classList.remove("hidden")
     document.getElementById('loginModal').classList.add("hidden")
 });
+
+function switchToLobby() {
+    console.log("bringing you to the lobby page...")
+    window.location.href = 'lobby.html';
+}
+window.switchToLobby = switchToLobby;
