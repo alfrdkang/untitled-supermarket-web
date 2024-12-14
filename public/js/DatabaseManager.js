@@ -1,4 +1,4 @@
-import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateEmail, updatePassword, signOut, deleteUser } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+import { getAuth , createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, updateEmail, updatePassword, signOut, deleteUser, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
 import { getDatabase, child, ref, set, get, push, update, remove, onValue, orderByChild, query } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 import { app } from './config.js';
 

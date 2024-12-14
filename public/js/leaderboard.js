@@ -50,13 +50,16 @@ export function updateLeaderboard(snapshot, sort) {
     const players = [];
     snapshot.forEach((childSnapshot) => {
         const playerData = childSnapshot.val();
-        players.push({
-            name: playerData.name,
-            stat: playerData[sort],
-        });
+        if (playerData[sort] != 0 && playerData[sort] != 0) {
+            players.push({
+                name: playerData.name,
+                stat: playerData[sort],
+            });
+        }
     });
-
-    players.reverse();
+    if (sort != "averageTimePerTransaction") {
+        players.reverse();
+    }
 
     const leaderboard = document.getElementById(sort+"Leaderboard");
     leaderboard.innerHTML = "";

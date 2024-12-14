@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
-
+    <script src="https://kit.fontawesome.com/c14073a443.js" crossorigin="anonymous"></script>
 </head> 
     <body class="bg-[url('img/bg/USSdoodleDark.jpg')] bg-cover flex flex-col bg-dblue h-screen w-screen font-dynapuff">
       <nav class="border-gray-200 bg-pink">
@@ -38,15 +38,15 @@
           </div>
         </nav>
         <div class="mx-4 min-h-screen w-5/6 sm:mx-8 xl:mx-auto dark:text-gray-200">
-            <h1 class="border-b border-gray-200 py-6 text-4xl">Settings</h1>
+            <h1 class="border-b border-gray-200 py-6 text-4xl"><i class="fa-solid fa-gear px-3"></i>Settings</h1>
             <div class="grid grid-cols-8 pt-3 sm:grid-cols-10">
               <div class="col-span-2 hidden sm:block">
                 <ul>
                   <li
-                    class="mt-5 cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition dark:border-blue-400 dark:text-blue-400" id="accountSettingsBtn">
+                    class="mt-5 cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition dark:border-blue-400 dark:text-blue-400" id="accountSettingsBtn"><i class="fa-solid fa-user px-3"></i>
                     Account</li>
                   <li
-                    class="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400"  id="storeSettingsBtn">
+                    class="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700 dark:hover:border-blue-400 dark:hover:text-blue-400"  id="storeSettingsBtn"><i class="fa-solid fa-shop px-3"></i>
                     Store</li>
                 </ul>
               </div>
@@ -117,8 +117,8 @@
                 </div>
                 <p class="py-8 text-gray-300 text-mg font-semibold underline" id="changePasswordBtn">Change Password</p>
                 <hr class="mt-4 mb-8 border-gray-700" />
-                <p class="py-8 text-cream text-xl font-semibold" id="logoutAccountBtn">Log Out</p>
-                <p class="py-8 text-pink text-xl font-semibold" id="deleteAccountBtn">Deactivate and Delete Account</p>
+                <p class="py-8 text-cream text-xl font-semibold" id="logoutAccountBtn"><i class="fa-solid fa-right-from-bracket fa-lg pr-3"></i>Log Out</p>
+                <p class="py-8 text-pink text-xl font-semibold" id="deleteAccountBtn"><i class="fa-solid fa-triangle-exclamation fa-lg text-pink pr-3"></i>Deactivate and Delete Account</p>
               </div>
               <div class="hidden col-span-8 overflow-hidden rounded-xl sm:px-8" id="storeSettingsModal">
                 <div class="pt-4">
@@ -156,10 +156,8 @@
                 <div class="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                   <div class="bg-dblue px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                     <div class="sm:flex sm:items-start">
-                      <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
-                        <svg class="size-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" data-slot="icon">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-                        </svg>
+                      <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full sm:mx-0 sm:size-10">
+                        <i class="fa-solid fa-triangle-exclamation fa-2xl text-red-400"></i>
                       </div>
                       <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                         <p class="text-xl text-red-400" id="modal-title">Deactivate and Delete account</p>

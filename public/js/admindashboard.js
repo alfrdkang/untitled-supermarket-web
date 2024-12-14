@@ -224,6 +224,7 @@ function showPlayerDetails(player) {
     body.classList.add('overflow-hidden');
     playersListPanel.classList.add('hidden');
     playerStatPanel.classList.remove('hidden');
+}
 
 document.getElementById('playerStatCloseBtn').addEventListener('click', closeDetailPanel);
 document.getElementById('playerListCloseBtn').addEventListener('click', closePlayersPanel);
@@ -233,9 +234,10 @@ function closeDetailPanel() {
     body.classList.remove('overflow-hidden');
     playersListPanel.classList.remove('hidden');
     playerStatPanel.classList.add('hidden');
-}}
+}
 
 function openPlayersPanel() {
+    console.log("open pls")
     body.classList.remove('overflow-hidden');
     playersListPanel.classList.remove('hidden');
     overallAdminPanel.classList.add('hidden');

@@ -1,4 +1,4 @@
-import { getPlayerDetails, auth, gameSessionListen, loginUser } from './DatabaseManager.js';
+import { getPlayerDetails, auth, gameSessionListen } from './DatabaseManager.js';
 
 const ictitle = document.getElementById("ictitle")
 const icserialno = document.getElementById("icserialno")
@@ -17,9 +17,6 @@ const mugshots = [
     "img/mugshots/officer.png",
     "img/mugshots/sally.png"
 ];
-
-// debug 
-loginUser("ut@g.com", "Password")
 
 auth.onAuthStateChanged(async (user) => {
     if (user) {
@@ -63,7 +60,7 @@ function displayCurrentCustomerID(dateOfBirth, name, isFake, spriteIndex) {
     } else {
         console.error("Invalid SpriteIndex");
     }
-
+    console.log(isFake);
     // Handle Fake Id
     if (isFake) {
         const fakeModifications = {
