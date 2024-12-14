@@ -340,10 +340,12 @@ export function getAllPlayersPerformanceMetrics(callback) {
 
         for (const playerId in data) {
             const player = data[playerId];
-            playerNames.push(player.name || "UndefinedName");
-            shiftsCompleted.push(player.shiftsCompleted || 0);
-            customersServed.push(player.customersServed || 0);
-            profitsEarned.push(player.profitsEarned || 0);
+            if (player.shiftsCompleted != 0 && player.shiftsCompleted != null) {
+              playerNames.push(player.name || "UndefinedName");
+              shiftsCompleted.push(player.shiftsCompleted || 0);
+              customersServed.push(player.customersServed || 0);
+              profitsEarned.push(player.profitsEarned || 0);
+            }
     }
     callback(playerNames, shiftsCompleted, customersServed, profitsEarned);
   })

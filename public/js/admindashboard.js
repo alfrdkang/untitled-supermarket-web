@@ -206,9 +206,9 @@ function showPlayerDetails(player) {
     PlayerStatPerformanceChartInstance = new Chart(PlayerStatPerformanceChart, {
         type: "doughnut",
         data: {
-            labels: ["High Score", "Remaining to Goal (10)"],
+            labels: ["High Score", "Remaining to Goal (100)"],
             datasets: [{
-                data: [player.highScore, 10-player.highScore],
+                data: [player.highScore, 100-player.highScore],
                 backgroundColor: ["rgba(153, 102, 255, 0.6)", "rgba(200, 200, 200, 0.6)"]
             }]
         },
