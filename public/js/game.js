@@ -60,7 +60,12 @@ function displayCurrentCustomerID(dateOfBirth, name, isFake, spriteIndex) {
     } else {
         console.error("Invalid SpriteIndex");
     }
-    console.log(isFake);
+
+    // Correct IC Details
+    ictitle.innerHTML = "Republic of Unionpire"
+    icCountry.innerHTML = "Unionpire"
+    icManufacturer.innerHTML = "Made by OrientIdentityOrg"
+    
     // Handle Fake Id
     if (isFake) {
         const fakeModifications = {
@@ -70,7 +75,7 @@ function displayCurrentCustomerID(dateOfBirth, name, isFake, spriteIndex) {
         };
 
         const keys = Object.keys(fakeModifications);
-        const randomKey = keys[Math.floor(Math.random() * keys.length)];
+        const randomKey = keys[Math.floor(Math.random() * keys.length)];    
 
         if (randomKey === "icTitle") {
             ictitle.innerHTML = fakeModifications.icTitle;
