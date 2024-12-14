@@ -219,55 +219,134 @@ async function getPlayerData() {
         });
 }
 
-async function getNumberOfPlayers() {
-    const db = getDatabase();
-    const playersRef = ref(db, 'players');
-  
-    try {
-      const snapshot = await get(playersRef);
-      if (snapshot.exists()) {
-        const playersData = snapshot.val();
-
-        const playerCount = Array.isArray(playersData)
-          ? playersData.filter(player => player !== null).length
-          : Object.keys(playersData).length;
-        return playerCount;
-      } else {
-        console.log("No players found in the database.");
-        return 0;
-      }
-    } catch (error) {
-      console.error("Error fetching player data:", error);
-      return 0;
-    }
-}
-
-async function getTotalShiftsCompleted() {
+function getNumberOfPlayers(callback) {
   const db = getDatabase();
   const playersRef = ref(db, 'players');
 
-  try {
-    const snapshot = await get(playersRef);
-    if (snapshot.exists()) {
-      const playersData = snapshot.val();
-      let totalShiftsCompleted = 0;
-
-      for (const userId in playersData) {
-        const player = playersData[userId];
-        if (player.shiftsCompleted) {
-          totalShiftsCompleted += player.shiftsCompleted;
+  onValue(
+    playersRef,
+    (snapshot) => {
+        if (snapshot.exists()) {
+            const playerCount = Object.keys(snapshot.val()).length;
+            callback(null, playerCount);
+        } else {
+            console.log("No players found in the database.");
+            callback(null, 0); // No players found
         }
-      }
-
-      return totalShiftsCompleted;
-    } else {
-      console.log("No player data found.");
-      return 0;
+    },
+    (error) => {
+        console.error("Error fetching player data:", error);
+        callback(error, null);
     }
-  } catch (error) {
-    console.error("Error fetching player data:", error);
-    return 0;
-  }
+  );
+}
+
+export function getPlayersList(callback) {
+  const db = getDatabase();
+  const playersRef = ref(db, 'players');
+
+  onValue(
+    playersRef,
+    (snapshot) => {
+        if (snapshot.exists()) {
+            callback(null, snapshot.val());
+        } else {
+            console.log("No players found in the database.");
+            callback(null, null); // No players found
+        }
+    },
+    (error) => {
+        console.error("Error fetching player list:", error);
+        callback(error, null);
+    }
+  );
+}
+
+function getTotalShiftsCompleted(callback) {
+  const db = getDatabase();
+  const playersRef = ref(db, 'players');
+
+  onValue(
+      playersRef,
+      (snapshot) => {
+          if (snapshot.exists()) {
+              const playersData = snapshot.val();
+              let totalShiftsCompleted = 0;
+
+              for (const userId in playersData) {
+                  const player = playersData[userId];
+                  if (player.shiftsCompleted) {
+                      totalShiftsCompleted += player.shiftsCompleted;
+                  }
+              }
+
+              callback(null, totalShiftsCompleted);
+          } else {
+              console.log("No player data found.");
+              callback(null, 0); // No shifts completed
+          }
+      },
+      (error) => {
+          console.error("Error fetching player data:", error);
+          callback(error, null);
+      }
+  );
+}
+
+
+export function getTotalActiveSessions(callback) {
+  console.log("Getting total active sessions!");
+  const sessionsRef = ref(db, 'sessions');
+
+  onValue(
+      sessionsRef,
+      (snapshot) => {
+          const childCount = snapshot.size || Object.keys(snapshot.val() || {}).length;
+          callback(null, childCount);
+      },
+      (error) => {
+          console.error("Error fetching data: ", error);
+          callback(error, null);
+      }
+  );
+}
+
+export function getAllPlayersMistakesDistribution(callback) {
+  const playersRef = ref(db, 'players');
+
+  onValue(playersRef, (snapshot) => {
+    const data = snapshot.val();
+    const mistakeCounts = {};
+
+    for (const playerId in data) {
+        const mistakes = data[playerId].mistakesMade || {};
+        for (const key in mistakes) {
+            mistakeCounts[key] = (mistakeCounts[key] || 0) + mistakes[key];
+        }
+    }
+    callback(mistakeCounts);
+  })
+}
+
+export function getAllPlayersPerformanceMetrics(callback) {
+  const playersRef = ref(db, 'players');
+
+  onValue(playersRef, (snapshot) => {
+    const data = snapshot.val();
+        const playerNames = [];
+        const shiftsCompleted = [];
+        const customersServed = [];
+        const profitsEarned = [];
+
+        for (const playerId in data) {
+            const player = data[playerId];
+            playerNames.push(player.name || "UndefinedName");
+            shiftsCompleted.push(player.shiftsCompleted || 0);
+            customersServed.push(player.customersServed || 0);
+            profitsEarned.push(player.profitsEarned || 0);
+    }
+    callback(playerNames, shiftsCompleted, customersServed, profitsEarned);
+  })
 }
 
 async function getPlayerDetails(uid) {

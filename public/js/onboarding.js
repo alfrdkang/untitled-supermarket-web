@@ -9,7 +9,7 @@ document.getElementById('signupbtn').addEventListener("click", () => {
             document.getElementById('signupemail').value,
             document.getElementById('signuppassword').value
         )) {
-            switchToLobby();
+            //
         }
     } else {
         console.log("Please Ensure That the Passwords Match!")
